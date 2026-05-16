@@ -1,16 +1,13 @@
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Administracao - FiguriQA 2026</title>
-</head>
-<body>
-<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<head th:replace="~{fragments/layout :: head('Administracao')}"></head>
+<body class="app-page">
+<header th:replace="~{fragments/header :: appHeader(${user})}"></header>
 <main class="container">
-    <h1>Administracao</h1>
+    <section class="page-hero compact admin-hero">
+        <div><span class="eyebrow">Painel administrativo</span><h1>Administracao</h1><p>Gerencie selecoes ficticias, catalogo e base inicial do laboratorio.</p></div>
+        <form method="post" action="/admin/reset"><button type="submit" class="danger">Resetar base</button></form>
+    </section>
     <section class="admin-grid">
         <article class="panel">
             <h2>Cadastrar selecao</h2>
@@ -38,9 +35,8 @@
     <section class="panel">
         <div class="title-row">
             <h2>Usuarios</h2>
-            <form method="post" action="/admin/reset"><button type="submit" class="danger">Resetar seed</button></form>
         </div>
-        <table>
+        <table class="data-table">
             <thead><tr><th>ID</th><th>Nome</th><th>Usuario</th><th>Perfil</th><th>Cidade</th></tr></thead>
             <tbody>
             <tr th:each="u : ${users}">
@@ -55,7 +51,7 @@
     </section>
     <section class="panel">
         <h2>Figurinhas cadastradas</h2>
-        <table>
+        <table class="data-table">
             <thead><tr><th>Codigo</th><th>Titulo</th><th>Selecao</th><th></th></tr></thead>
             <tbody>
             <tr th:each="sticker : ${stickers}">
@@ -73,6 +69,7 @@
         </table>
     </section>
 </main>
-<script src="/js/app.js"></script>
+<div th:replace="~{fragments/footer :: pwaInstall}"></div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Trocas sugeridas - FiguriQA 2026</title>
-</head>
-<body>
-<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<head th:replace="~{fragments/layout :: head('Trocas sugeridas')}"></head>
+<body class="app-page">
+<header th:replace="~{fragments/header :: appHeader(${user})}"></header>
 <main class="container">
-    <div class="title-row"><h1>Trocas sugeridas</h1><a href="/trocas">Ver propostas</a></div>
+    <section class="page-hero compact">
+        <div><span class="eyebrow">Mercado de trocas</span><h1>Trocas sugeridas</h1><p>Compare repetidas e faltantes para propor negociacoes entre colecionadores.</p></div>
+        <a class="button secondary" href="/trocas">Ver propostas</a>
+    </section>
     <section class="suggestions">
-        <article class="suggestion" th:each="s : ${suggestions}">
-            <h2 th:text="'Com ' + ${s.receiver.name}"></h2>
-            <p>Voce envia <strong th:text="${s.iGive.code}"></strong> e recebe <strong th:text="${s.iReceive.code}"></strong>.</p>
-            <small th:text="${s.note}"></small>
+        <article class="trade-card" th:each="s : ${suggestions}">
+            <div class="panel-heading"><h2 th:text="'Com ' + ${s.receiver.name}"></h2><span class="status-badge pendente">Sugestao</span></div>
+            <div class="trade-sides">
+                <div><small>Voce oferece</small><strong th:text="${s.iGive.code}"></strong><span th:text="${s.iGive.title}"></span></div>
+                <div><small>Voce recebe</small><strong th:text="${s.iReceive.code}"></strong><span th:text="${s.iReceive.title}"></span></div>
+            </div>
+            <p th:text="${s.note}"></p>
             <form method="post" action="/trocas/propor">
                 <input type="hidden" name="receiverId" th:value="${s.receiver.id}">
                 <input type="hidden" name="giveStickerId" th:value="${s.iGive.id}">
@@ -25,6 +25,7 @@
         </article>
     </section>
 </main>
-<script src="/js/app.js"></script>
+<div th:replace="~{fragments/footer :: pwaInstall}"></div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

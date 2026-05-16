@@ -1,8 +1,12 @@
-const CACHE_NAME = "figuriqa-2026-v2";
+const CACHE_NAME = "figuriqa-2026-v3";
 const APP_SHELL = [
     "/offline.html",
     "/css/app.css",
     "/js/app.js",
+    "/js/pwa-install.js",
+    "/img/logo.svg",
+    "/img/icon-192.svg",
+    "/img/icon-512.svg",
     "/manifest.json"
 ];
 

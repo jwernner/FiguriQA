@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102447">
+    <meta name="description" content="FiguriQA 2026, portal didatico de qualidade de software e figurinhas ficticias.">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/img/icon-192.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/app.css">
+    <title th:text="${title} + ' - FiguriQA 2026'">FiguriQA 2026</title>
+</head>
+<body>
+<div th:fragment="scripts">
+    <script src="/js/app.js"></script>
+    <script src="/js/pwa-install.js"></script>
+</div>
+</body>
+</html>

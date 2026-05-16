@@ -1,40 +1,55 @@
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#176b87">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Dashboard - FiguriQA 2026</title>
-</head>
-<body>
-<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body class="app-page">
+<header th:replace="~{fragments/header :: appHeader(${user})}"></header>
 <main class="container">
-    <h1>Dashboard</h1>
-    <section class="stats-grid">
-        <article class="stat"><span th:text="${#numbers.formatDecimal(stats.percent, 1, 1)} + '%'">0%</span><small>Conclusao do album</small></article>
-        <article class="stat"><span th:text="${stats.unique}">0</span><small>Unicas obtidas</small></article>
-        <article class="stat"><span th:text="${stats.missing}">0</span><small>Faltantes</small></article>
-        <article class="stat"><span th:text="${stats.repeated}">0</span><small>Repetidas</small></article>
+    <section class="page-hero compact">
+        <div>
+            <span class="eyebrow">Painel do colecionador</span>
+            <h1>Dashboard</h1>
+            <p th:text="'Bem-vindo, ' + ${user.name} + '. Acompanhe seu album e priorize os proximos testes.'"></p>
+        </div>
+        <a class="button secondary" href="/trocas/sugestoes">Ver sugestoes de troca</a>
     </section>
-    <section class="panel">
-        <h2>Ultimas propostas</h2>
-        <div class="empty" th:if="${trades.isEmpty()}">Nenhuma proposta recente.</div>
-        <table th:if="${!trades.isEmpty()}">
-            <thead><tr><th>ID</th><th>Com</th><th>Status</th><th>Codigo</th><th></th></tr></thead>
-            <tbody>
-            <tr th:each="trade : ${trades}">
-                <td th:text="${trade.id}"></td>
-                <td th:text="${trade.requester.id == user.id ? trade.receiver.name : trade.requester.name}"></td>
-                <td><span class="badge" th:text="${trade.status}"></span></td>
-                <td th:text="${trade.confirmationCode}"></td>
-                <td><a th:href="@{/trocas/{id}(id=${trade.id})}">Abrir</a></td>
-            </tr>
-            </tbody>
-        </table>
+
+    <section class="stats-grid dashboard-stats">
+        <article class="stat progress-stat">
+            <small>Progresso do album</small>
+            <span th:text="${#numbers.formatDecimal(stats.percent, 1, 1)} + '%'">0%</span>
+            <div class="progress-track"><div th:style="'width:' + ${stats.percent > 100 ? 100 : stats.percent} + '%'"></div></div>
+        </article>
+        <article class="stat"><small>Figurinhas unicas</small><span th:text="${stats.unique}">0</span></article>
+        <article class="stat"><small>Faltantes</small><span th:text="${stats.missing}">0</span></article>
+        <article class="stat"><small>Repetidas</small><span th:text="${stats.repeated}">0</span></article>
+        <article class="stat"><small>Trocas pendentes</small><span th:text="${trades.size()}">0</span></article>
+    </section>
+
+    <section class="dashboard-grid">
+        <article class="panel">
+            <div class="panel-heading"><h2>Ultimas propostas</h2><a href="/trocas">Todas</a></div>
+            <div class="empty" th:if="${trades.isEmpty()}">Nenhuma proposta recente.</div>
+            <div class="trade-feed" th:if="${!trades.isEmpty()}">
+                <a class="trade-feed-item" th:each="trade : ${trades}" th:href="@{/trocas/{id}(id=${trade.id})}">
+                    <span class="status-dot" th:classappend="${trade.status.name().toLowerCase()}"></span>
+                    <div>
+                        <strong th:text="${trade.requester.id == user.id ? trade.receiver.name : trade.requester.name}"></strong>
+                        <small th:text="'Codigo ' + ${trade.confirmationCode}"></small>
+                    </div>
+                    <span class="status-badge" th:classappend="${trade.status.name().toLowerCase()}" th:text="${trade.status}"></span>
+                </a>
+            </div>
+        </article>
+
+        <article class="panel action-panel">
+            <h2>Proximas acoes</h2>
+            <a href="/album"><span>Inspecionar album</span><small>Compare filtros, busca e estados visuais.</small></a>
+            <a href="/colecao"><span>Atualizar quantidades</span><small>Teste limites, valores inesperados e feedback.</small></a>
+            <a href="/ranking"><span>Conferir ranking</span><small>Valide consistencia entre progresso e totais.</small></a>
+        </article>
     </section>
 </main>
-<script src="/js/app.js"></script>
+<div th:replace="~{fragments/footer :: pwaInstall}"></div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

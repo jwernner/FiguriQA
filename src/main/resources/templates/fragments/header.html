@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="publicHeader" class="site-header public-header">
+    <a class="brand-mark" href="/">
+        <img src="/img/logo.svg" alt="FiguriQA 2026">
+    </a>
+    <nav class="public-nav">
+        <a href="/#laboratorio">Conhecer o laboratorio</a>
+        <a class="button small" href="/login">Entrar</a>
+    </nav>
+</header>
+
+<header th:fragment="appHeader(user)" class="app-shell-header">
+    <a class="app-brand" href="/dashboard">
+        <img src="/img/logo.svg" alt="FiguriQA 2026">
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Abrir menu" onclick="document.body.classList.toggle('nav-open')">
+        <span></span><span></span><span></span>
+    </button>
+    <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/album">Album</a>
+        <a href="/colecao">Minha colecao</a>
+        <a href="/trocas/sugestoes">Trocas</a>
+        <a href="/ranking">Ranking</a>
+        <a href="/pontos">Pontos de troca</a>
+        <a th:if="${user.role.name() == 'ADMIN'}" href="/admin">Admin</a>
+    </nav>
+    <section class="user-chip" aria-label="Usuario logado">
+        <div>
+            <strong th:utext="${user.nickname}">Usuario</strong>
+            <span th:text="${user.city}">Cidade</span>
+        </div>
+        <span class="role-badge" th:classappend="${user.role.name().toLowerCase()}" th:text="${user.role}">COLECIONADOR</span>
+        <form method="post" action="/logout">
+            <button class="icon-logout" type="submit" aria-label="Sair do sistema">Sair</button>
+        </form>
+    </section>
+</header>
+</body>
+</html>

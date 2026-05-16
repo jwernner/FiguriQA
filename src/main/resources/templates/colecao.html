@@ -1,16 +1,12 @@
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Minha colecao - FiguriQA 2026</title>
-</head>
-<body>
-<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<head th:replace="~{fragments/layout :: head('Minha colecao')}"></head>
+<body class="app-page">
+<header th:replace="~{fragments/header :: appHeader(${user})}"></header>
 <main class="container">
-    <h1>Minha colecao</h1>
+    <section class="page-hero compact">
+        <div><span class="eyebrow">Inventario editavel</span><h1>Minha colecao</h1><p>Atualize quantidades e observe o impacto visual nos estados das figurinhas.</p></div>
+    </section>
     <form class="filters" method="get">
         <select name="filtro">
             <option value="todas" th:selected="${filtro == 'todas'}">Todas</option>
@@ -21,33 +17,30 @@
         <input name="busca" placeholder="Buscar figurinha" th:value="${busca}">
         <button type="submit">Filtrar</button>
     </form>
-    <div class="table-wrap">
-        <table>
-            <thead><tr><th>Codigo</th><th>Titulo</th><th>Status</th><th>Quantidade</th><th>Acao</th></tr></thead>
-            <tbody>
-            <tr th:each="view : ${stickers}">
-                <td th:text="${view.sticker.code}"></td>
-                <td th:text="${view.sticker.title}"></td>
-                <td><span class="badge" th:text="${view.status}"></span></td>
-                <td>
-                    <form method="post" action="/colecao/quantidade" class="inline-form">
-                        <input type="hidden" name="stickerId" th:value="${view.sticker.id}">
-                        <input type="number" name="quantity" th:value="${view.quantity}">
-                        <button type="submit">Salvar</button>
-                    </form>
-                </td>
-                <td>
-                    <form method="post" action="/colecao/quantidade">
-                        <input type="hidden" name="stickerId" th:value="${view.sticker.id}">
-                        <input type="hidden" name="quantity" value="0">
-                        <button type="submit" class="ghost">Zerar</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <section class="collection-list">
+        <article class="collection-row" th:each="view : ${stickers}" th:classappend="${view.status}">
+            <div class="mini-sticker"><span th:text="${view.sticker.code}"></span></div>
+            <div class="collection-info">
+                <strong th:text="${view.sticker.title}"></strong>
+                <small th:text="${view.sticker.team.name} + ' · ' + ${view.sticker.rarity}"></small>
+                <span class="status-badge" th:text="${view.status}"></span>
+            </div>
+            <form method="post" action="/colecao/quantidade" class="quantity-form">
+                <input type="hidden" name="stickerId" th:value="${view.sticker.id}">
+                <button type="button" class="stepper" data-step="-1" aria-label="Diminuir quantidade">-</button>
+                <input type="number" name="quantity" th:value="${view.quantity}">
+                <button type="button" class="stepper" data-step="1" aria-label="Aumentar quantidade">+</button>
+                <button type="submit" data-save-feedback>Salvar</button>
+            </form>
+            <form method="post" action="/colecao/quantidade">
+                <input type="hidden" name="stickerId" th:value="${view.sticker.id}">
+                <input type="hidden" name="quantity" value="0">
+                <button type="submit" class="ghost">Zerar</button>
+            </form>
+        </article>
+    </section>
 </main>
-<script src="/js/app.js"></script>
+<div th:replace="~{fragments/footer :: pwaInstall}"></div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

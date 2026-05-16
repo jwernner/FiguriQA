@@ -1,29 +1,29 @@
 <!doctype html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Pontos de troca - FiguriQA 2026</title>
-</head>
-<body>
-<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<head th:replace="~{fragments/layout :: head('Pontos de troca')}"></head>
+<body class="app-page">
+<header th:replace="~{fragments/header :: appHeader(${user})}"></header>
 <main class="container">
-    <h1>Pontos de troca</h1>
+    <section class="page-hero compact">
+        <div><span class="eyebrow">Encontros ficticios</span><h1>Pontos de troca</h1><p>Locais imaginarios para simular encontros entre colecionadores.</p></div>
+    </section>
     <form method="get" class="filters">
         <input name="cidade" placeholder="Filtrar por cidade" th:value="${cidade}">
         <button type="submit">Filtrar</button>
     </form>
-    <section class="suggestions">
-        <article class="suggestion" th:each="point : ${points}">
+    <section class="point-grid">
+        <article class="point-card" th:each="point : ${points}">
+            <span class="location-pin">PIN</span>
             <h2 th:text="${point.name}"></h2>
             <p th:text="${point.address}"></p>
-            <span class="badge" th:text="${point.city}"></span>
-            <span class="badge" th:text="${point.active ? 'Ativo' : 'Inativo'}"></span>
+            <div class="sticker-meta">
+                <span th:text="${point.city}"></span>
+                <span class="status-badge" th:classappend="${point.active ? 'aceita' : 'cancelada'}" th:text="${point.active ? 'Ativo' : 'Inativo'}"></span>
+            </div>
         </article>
     </section>
 </main>
-<script src="/js/app.js"></script>
+<div th:replace="~{fragments/footer :: pwaInstall}"></div>
+<div th:replace="~{fragments/layout :: scripts}"></div>
 </body>
 </html>

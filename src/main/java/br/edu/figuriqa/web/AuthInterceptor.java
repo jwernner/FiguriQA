@@ -12,7 +12,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String path = request.getRequestURI();
         if (path.equals("/") || path.startsWith("/login") || path.startsWith("/css/")
-                || path.startsWith("/js/") || path.startsWith("/icons/") || path.equals("/manifest.json")
+                || path.startsWith("/js/") || path.startsWith("/icons/") || path.startsWith("/img/") || path.equals("/manifest.json")
                 || path.equals("/service-worker.js") || path.equals("/offline.html") || path.startsWith("/h2-console")) {
             return true;
         }

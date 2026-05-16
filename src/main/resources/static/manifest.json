@@ -2,19 +2,19 @@
   "name": "FiguriQA 2026",
   "short_name": "FiguriQA",
   "description": "Portal didatico de gestao e troca de figurinhas ficticias.",
-  "start_url": "/dashboard",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f6f8fb",
-  "theme_color": "#176b87",
+  "start_url": "/",
+  "background_color": "#07152d",
+  "theme_color": "#102447",
   "icons": [
     {
-      "src": "/icons/icon-192.svg",
+      "src": "/img/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "/icons/icon-512.svg",
+      "src": "/img/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }

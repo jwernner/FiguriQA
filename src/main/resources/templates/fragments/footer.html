@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer" class="site-footer">
+    <span>FiguriQA 2026</span>
+    <span>Laboratorio didatico de Gestao e Qualidade de Software</span>
+</footer>
+
+<div th:fragment="pwaInstall" id="pwa-install-banner" class="pwa-install" hidden>
+    <div class="pwa-install-copy">
+        <strong>Instale o FiguriQA 2026 no seu celular</strong>
+        <span id="pwa-install-text">Acesse o laboratorio como um app PWA.</span>
+    </div>
+    <div class="pwa-install-actions">
+        <button id="pwa-install-button" type="button">Instalar aplicativo</button>
+        <button id="pwa-dismiss-button" class="ghost" type="button">Agora nao</button>
+    </div>
+</div>
+</body>
+</html>

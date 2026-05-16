@@ -8,6 +8,8 @@ Voce recebeu acesso ao FiguriQA 2026, um portal ficticio de gestao e troca de fi
 
 Explore o sistema como se fosse uma pessoa usuaria real. Teste login, album, colecao, trocas, ranking, pontos de troca, comportamento mobile, PWA/offline e controle de acesso. Seu objetivo e encontrar, registrar e comunicar bugs com clareza.
 
+O sistema tambem deve ser avaliado como produto responsivo: observe layout no celular, menu, cards de figurinhas, instalacao como PWA, comportamento offline e mensagens exibidas durante a experiencia mobile.
+
 ## Usuarios disponiveis
 
 - `ana / 123456`
@@ -46,4 +48,6 @@ Sugestao de correcao:
 - Compare dados entre telas diferentes.
 - Tente valores limites e entradas inesperadas.
 - Verifique se uma acao altera o estado esperado do sistema.
-- Teste em tela pequena e, se possivel, em modo offline.
+- Teste em tela pequena, no navegador do celular e como PWA instalado quando possivel.
+- Em iPhone, avalie a orientacao manual para adicionar a tela de inicio.
+- Teste em modo offline e observe se as mensagens fazem sentido.
