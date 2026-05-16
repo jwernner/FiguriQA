@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Album - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <h1>Album</h1>
+    <form class="filters" method="get">
+        <select name="filtro">
+            <option value="todas" th:selected="${filtro == 'todas'}">Todas</option>
+            <option value="obtidas" th:selected="${filtro == 'obtidas'}">Obtidas</option>
+            <option value="faltantes" th:selected="${filtro == 'faltantes'}">Faltantes</option>
+            <option value="repetidas" th:selected="${filtro == 'repetidas'}">Repetidas</option>
+        </select>
+        <input name="busca" placeholder="Buscar por codigo ou titulo" th:value="${busca}">
+        <button type="submit">Filtrar</button>
+    </form>
+    <section class="sticker-grid">
+        <article class="sticker" th:each="view : ${stickers}" th:classappend="${view.status}">
+            <div class="code" th:text="${view.sticker.code}"></div>
+            <h2 th:text="${view.sticker.title}"></h2>
+            <p th:text="${view.sticker.team.name} + ' - Grupo ' + ${view.sticker.team.groupName}"></p>
+            <span class="badge" th:text="${view.status}"></span>
+            <small th:text="'Qtd: ' + ${view.quantity}"></small>
+        </article>
+    </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

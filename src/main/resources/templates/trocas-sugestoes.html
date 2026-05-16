@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Trocas sugeridas - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <div class="title-row"><h1>Trocas sugeridas</h1><a href="/trocas">Ver propostas</a></div>
+    <section class="suggestions">
+        <article class="suggestion" th:each="s : ${suggestions}">
+            <h2 th:text="'Com ' + ${s.receiver.name}"></h2>
+            <p>Voce envia <strong th:text="${s.iGive.code}"></strong> e recebe <strong th:text="${s.iReceive.code}"></strong>.</p>
+            <small th:text="${s.note}"></small>
+            <form method="post" action="/trocas/propor">
+                <input type="hidden" name="receiverId" th:value="${s.receiver.id}">
+                <input type="hidden" name="giveStickerId" th:value="${s.iGive.id}">
+                <input type="hidden" name="receiveStickerId" th:value="${s.iReceive.id}">
+                <button class="propose-button" type="submit">Propor troca</button>
+            </form>
+        </article>
+    </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Administracao - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <h1>Administracao</h1>
+    <section class="admin-grid">
+        <article class="panel">
+            <h2>Cadastrar selecao</h2>
+            <form method="post" action="/admin/teams" class="stack">
+                <input name="name" placeholder="Nome" required>
+                <input name="groupName" placeholder="Grupo" required>
+                <input name="fictionalConfederation" placeholder="Confederacao ficticia" required>
+                <button type="submit">Salvar selecao</button>
+            </form>
+        </article>
+        <article class="panel">
+            <h2>Cadastrar figurinha</h2>
+            <form method="post" action="/admin/stickers" class="stack">
+                <input name="code" placeholder="Codigo" required>
+                <input name="title" placeholder="Titulo" required>
+                <input name="type" placeholder="Tipo" required>
+                <input name="rarity" placeholder="Raridade" required>
+                <select name="teamId">
+                    <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                </select>
+                <button type="submit">Salvar figurinha</button>
+            </form>
+        </article>
+    </section>
+    <section class="panel">
+        <div class="title-row">
+            <h2>Usuarios</h2>
+            <form method="post" action="/admin/reset"><button type="submit" class="danger">Resetar seed</button></form>
+        </div>
+        <table>
+            <thead><tr><th>ID</th><th>Nome</th><th>Usuario</th><th>Perfil</th><th>Cidade</th></tr></thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.name}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.role}"></td>
+                <td th:text="${u.city}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="panel">
+        <h2>Figurinhas cadastradas</h2>
+        <table>
+            <thead><tr><th>Codigo</th><th>Titulo</th><th>Selecao</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="sticker : ${stickers}">
+                <td th:text="${sticker.code}"></td>
+                <td th:text="${sticker.title}"></td>
+                <td th:text="${sticker.team.name}"></td>
+                <td>
+                    <form method="post" action="/admin/stickers/delete">
+                        <input type="hidden" name="id" th:value="${sticker.id}">
+                        <button type="submit" class="icon-button">x</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

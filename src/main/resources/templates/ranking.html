@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Ranking - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <div class="title-row"><h1>Ranking</h1><a href="/ranking.csv">Exportar CSV</a></div>
+    <table>
+        <thead><tr><th>#</th><th>Usuario</th><th>Apelido</th><th>Percentual</th><th>Unicas</th><th>Faltantes</th><th>Repetidas</th></tr></thead>
+        <tbody>
+        <tr th:each="entry, iter : ${ranking}">
+            <td th:text="${iter.count}"></td>
+            <td th:text="${entry.user.name}"></td>
+            <td th:utext="${entry.user.nickname}"></td>
+            <td th:text="${#numbers.formatDecimal(entry.stats.percent, 1, 1)} + '%'"></td>
+            <td th:text="${entry.stats.unique}"></td>
+            <td th:text="${entry.stats.missing}"></td>
+            <td th:text="${entry.stats.repeated}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

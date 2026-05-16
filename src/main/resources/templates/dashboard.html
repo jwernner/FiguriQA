@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#176b87">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Dashboard - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <h1>Dashboard</h1>
+    <section class="stats-grid">
+        <article class="stat"><span th:text="${#numbers.formatDecimal(stats.percent, 1, 1)} + '%'">0%</span><small>Conclusao do album</small></article>
+        <article class="stat"><span th:text="${stats.unique}">0</span><small>Unicas obtidas</small></article>
+        <article class="stat"><span th:text="${stats.missing}">0</span><small>Faltantes</small></article>
+        <article class="stat"><span th:text="${stats.repeated}">0</span><small>Repetidas</small></article>
+    </section>
+    <section class="panel">
+        <h2>Ultimas propostas</h2>
+        <div class="empty" th:if="${trades.isEmpty()}">Nenhuma proposta recente.</div>
+        <table th:if="${!trades.isEmpty()}">
+            <thead><tr><th>ID</th><th>Com</th><th>Status</th><th>Codigo</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="trade : ${trades}">
+                <td th:text="${trade.id}"></td>
+                <td th:text="${trade.requester.id == user.id ? trade.receiver.name : trade.requester.name}"></td>
+                <td><span class="badge" th:text="${trade.status}"></span></td>
+                <td th:text="${trade.confirmationCode}"></td>
+                <td><a th:href="@{/trocas/{id}(id=${trade.id})}">Abrir</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

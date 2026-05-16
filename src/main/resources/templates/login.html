@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#176b87">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Login - FiguriQA 2026</title>
+</head>
+<body class="login-page">
+<main class="login-box">
+    <h1>FiguriQA 2026</h1>
+    <p>Portal didatico de colecao e troca de figurinhas ficticias.</p>
+    <form method="post" action="/login" class="stack">
+        <label>Usuario <input name="username" autofocus required></label>
+        <label>Senha <input type="password" name="password" required></label>
+        <button type="submit">Entrar</button>
+    </form>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+    <section class="demo-users">
+        <strong>Usuarios:</strong> ana/123456, bruno/123456, carla/123456, admin/admin123
+    </section>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

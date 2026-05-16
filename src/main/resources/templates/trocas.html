@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Propostas - FiguriQA 2026</title>
+</head>
+<body>
+<nav th:replace="~{fragments :: nav(${user})}"></nav>
+<main class="container">
+    <div class="title-row"><h1>Propostas de troca</h1><a href="/trocas/sugestoes">Sugestoes</a></div>
+    <table>
+        <thead><tr><th>ID</th><th>Solicitante</th><th>Recebedor</th><th>Status</th><th>Criada em</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="trade : ${trades}">
+            <td th:text="${trade.id}"></td>
+            <td th:text="${trade.requester.name}"></td>
+            <td th:text="${trade.receiver.name}"></td>
+            <td><span class="badge" th:text="${trade.status}"></span></td>
+            <td th:text="${#temporals.format(trade.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+            <td><a th:href="@{/trocas/{id}(id=${trade.id})}">Detalhe</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script src="/js/app.js"></script>
+</body>
+</html>

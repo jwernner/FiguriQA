@@ -1,0 +1,8 @@
+services:
+  figuriqa-2026:
+    build: .
+    container_name: figuriqa-2026
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
