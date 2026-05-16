@@ -20,12 +20,11 @@ import br.edu.figuriqa.repository.UserStickerRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class SeedData implements CommandLineRunner {
+public class SeedData {
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
     private final StickerRepository stickerRepository;
@@ -44,12 +43,6 @@ public class SeedData implements CommandLineRunner {
         this.swapPointRepository = swapPointRepository;
         this.tradeRepository = tradeRepository;
         this.tradeItemRepository = tradeItemRepository;
-    }
-
-    @Override
-    @Transactional
-    public void run(String... args) {
-        reset();
     }
 
     @Transactional

@@ -13,7 +13,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String path = request.getRequestURI();
         if (path.equals("/") || path.startsWith("/login") || path.startsWith("/css/")
                 || path.startsWith("/js/") || path.startsWith("/icons/") || path.startsWith("/img/") || path.equals("/manifest.json")
-                || path.equals("/service-worker.js") || path.equals("/offline.html") || path.startsWith("/h2-console")) {
+                || path.equals("/service-worker.js") || path.equals("/offline.html")) {
             return true;
         }
         User currentUser = (User) request.getSession().getAttribute("currentUser");

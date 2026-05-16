@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 45m
+
+spring:
+  application:
+    name: FiguriQA 2026
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/figuriqa}
+    username: ${SPRING_DATASOURCE_USERNAME:figuriqa_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:figuriqa_pass}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+    properties:
+      hibernate:
+        format_sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    br.edu.figuriqa: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local,dev
+  thymeleaf:
+    cache: false

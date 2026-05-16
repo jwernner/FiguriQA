@@ -18,7 +18,8 @@ O sistema contem bugs intencionais. O arquivo `BUG_MAP_PROFESSOR.md` e exclusivo
 - Spring MVC
 - Thymeleaf
 - Spring Data JPA
-- H2 Database
+- PostgreSQL
+- Flyway
 - HTML, CSS e JavaScript simples
 - PWA
 - Docker e Docker Compose
@@ -34,6 +35,13 @@ A interface mistura album de figurinhas, futebol ficticio, tecnologia e qualidad
 - paleta em azul escuro, ciano, roxo e dourado.
 
 Os assets ficam em `src/main/resources/static/img/`.
+
+## Pre-requisitos
+
+- Docker
+- Docker Compose
+
+Nao e necessario instalar Java, Maven ou PostgreSQL localmente para executar a aplicacao via Docker.
 
 ## Como executar com Docker
 
@@ -55,6 +63,22 @@ A rota inicial exibe a landing page publica. Para entrar diretamente no sistema,
 http://localhost:8080/login
 ```
 
+## Banco de dados
+
+O ambiente usa PostgreSQL, criado pelo Docker Compose.
+
+Dados de conexao local:
+
+| Campo | Valor |
+| --- | --- |
+| Host | `localhost` |
+| Porta | `5432` |
+| Banco | `figuriqa` |
+| Usuario | `figuriqa_user` |
+| Senha | `figuriqa_pass` |
+
+As tabelas e o seed inicial sao criados pelo Flyway em `src/main/resources/db/migration`.
+
 ## Usuarios de teste
 
 | Usuario | Senha | Perfil |
@@ -72,14 +96,20 @@ docker compose down
 
 ## Como resetar o ambiente
 
-Como o banco H2 esta em memoria, reiniciar a aplicacao recria a base inicial:
+Para parar a aplicacao mantendo os dados do PostgreSQL:
 
 ```bash
 docker compose down
+```
+
+Para limpar completamente os dados persistidos e recriar o banco pelo Flyway:
+
+```bash
+docker compose down -v
 docker compose up --build
 ```
 
-Tambem existe uma opcao de reset na tela de Administracao.
+Tambem existe uma opcao de reset na tela de Administracao para retornar a massa didatica inicial sem remover o volume.
 
 ## Uso como PWA
 

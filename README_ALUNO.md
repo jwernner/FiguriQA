@@ -10,6 +10,8 @@ Explore o sistema como se fosse uma pessoa usuaria real. Teste login, album, col
 
 O sistema tambem deve ser avaliado como produto responsivo: observe layout no celular, menu, cards de figurinhas, instalacao como PWA, comportamento offline e mensagens exibidas durante a experiencia mobile.
 
+Os alunos nao precisam conhecer ou acessar o banco de dados para testar. O ambiente usa PostgreSQL nos bastidores, mas a atividade deve priorizar comportamentos funcionais, fluxos, consistencia entre telas, usabilidade, PWA e controle de acesso.
+
 ## Usuarios disponiveis
 
 - `ana / 123456`
