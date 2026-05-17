@@ -1,0 +1,17 @@
+target/
+.git/
+.idea/
+.vscode/
+nbproject/private/
+release-alunos/
+figuriqa-2026-alunos.zip
+*.log
+.env
+postgres-data/
+uploads/
+tmp/
+node_modules/
+dist/
+build/
+BUG_MAP_PROFESSOR.md
+CHECKLIST_PROFESSOR.md

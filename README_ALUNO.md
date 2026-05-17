@@ -1,55 +1,116 @@
-# Atividade pratica - FiguriQA 2026
+# Atividade Prática — Testes e Qualidade de Software no FiguriQA 2026
 
 ## Contexto
 
-Voce recebeu acesso ao FiguriQA 2026, um portal ficticio de gestao e troca de figurinhas de futebol. O sistema foi criado para uma atividade de Gestao e Qualidade de Software.
+Vocês fazem parte de uma equipe de QA responsável por testar um portal de gestão e troca de figurinhas em ambiente de homologação.
 
-## Missao
+O FiguriQA 2026 simula um produto web com funcionalidades de coleção, álbum, trocas, ranking, pontos de troca, administração e experiência PWA.
 
-Explore o sistema como se fosse uma pessoa usuaria real. Teste login, album, colecao, trocas, ranking, pontos de troca, comportamento mobile, PWA/offline e controle de acesso. Seu objetivo e encontrar, registrar e comunicar bugs com clareza.
+## Missão dos alunos
 
-O sistema tambem deve ser avaliado como produto responsivo: observe layout no celular, menu, cards de figurinhas, instalacao como PWA, comportamento offline e mensagens exibidas durante a experiencia mobile.
+A missão da equipe é:
 
-Os alunos nao precisam conhecer ou acessar o banco de dados para testar. O ambiente usa PostgreSQL nos bastidores, mas a atividade deve priorizar comportamentos funcionais, fluxos, consistencia entre telas, usabilidade, PWA e controle de acesso.
+- explorar o sistema;
+- identificar comportamentos incorretos;
+- registrar bugs;
+- classificar severidade e prioridade;
+- anexar evidências;
+- sugerir melhorias;
+- criar casos de teste de regressão.
 
-## Usuarios disponiveis
+## Áreas que devem ser testadas
+
+- Login
+- Dashboard
+- Álbum
+- Minha coleção
+- Trocas
+- Ranking
+- Pontos de troca
+- Administração
+- Responsividade mobile
+- PWA
+- Comportamento offline
+- Validação de campos
+- Controle de acesso
+- Relatórios ou exportações, se existirem
+
+## Usuários disponíveis
 
 - `ana / 123456`
 - `bruno / 123456`
 - `carla / 123456`
 - `admin / admin123`
 
-## Modelo de relatorio de bug
+O usuário `admin` existe apenas para fins de teste do ambiente.
 
-Use um registro por bug encontrado.
+## Modelo de relatório de bug
+
+Cada bug deve seguir este formato:
 
 ```text
 ID:
-Titulo:
-Area:
+Título:
+Área:
+Tipo:
 Severidade:
 Prioridade:
 Ambiente:
+Usuário utilizado:
 Passos para reproduzir:
-1.
-2.
-3.
-
 Resultado esperado:
-
 Resultado obtido:
-
-Evidencia:
-
-Sugestao de correcao:
+Evidência:
+Sugestão de correção:
+Caso de teste de regressão:
 ```
 
-## Dicas
+## Critérios de classificação
 
-- Teste com mais de um usuario.
+### Severidade
+
+- Baixa
+- Média
+- Alta
+- Crítica
+
+### Prioridade
+
+- Baixa
+- Média
+- Alta
+- Urgente
+
+### Tipos de defeito
+
+- Funcional
+- Usabilidade
+- Validação
+- Segurança
+- Responsividade
+- PWA
+- Dados
+- Regra de negócio
+- Acessibilidade
+- Performance
+
+## Entregáveis
+
+A equipe deve entregar:
+
+- relatório de bugs;
+- evidências em imagem ou vídeo curto;
+- lista dos principais riscos encontrados;
+- sugestão de melhorias;
+- pelo menos um caso de teste de regressão para cada bug crítico ou de alta severidade.
+
+## Orientações
+
+- Teste com mais de um usuário.
 - Compare dados entre telas diferentes.
 - Tente valores limites e entradas inesperadas.
-- Verifique se uma acao altera o estado esperado do sistema.
-- Teste em tela pequena, no navegador do celular e como PWA instalado quando possivel.
-- Em iPhone, avalie a orientacao manual para adicionar a tela de inicio.
+- Verifique se uma ação altera o estado esperado do sistema.
+- Teste em tela pequena, no navegador do celular e como PWA instalado quando possível.
+- Em iPhone, avalie a orientação manual para adicionar à tela de início.
 - Teste em modo offline e observe se as mensagens fazem sentido.
+- Registre evidências claras para facilitar a reprodução.

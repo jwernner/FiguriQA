@@ -1,16 +1,26 @@
-# FiguriQA 2026
+# FiguriQA 2026 — Portal Didático de Gestão e Troca de Figurinhas
 
-Portal web didatico, em Java, para a disciplina de Gestao e Qualidade de Software. A aplicacao simula um sistema ficticio de gestao e troca de figurinhas de um campeonato mundial de futebol em 2026, sem uso de marcas, escudos, jogadores, logotipos ou imagens reais.
+## Sobre o projeto
 
-O FiguriQA 2026 possui identidade visual propria, logo em SVG local, landing page publica, experiencia responsiva e recursos PWA para instalacao em celular.
+O FiguriQA 2026 é um portal web didático para gestão e troca de figurinhas fictícias de futebol. O sistema foi criado para uma atividade prática da disciplina de Gestão e Qualidade de Software.
 
-## Objetivo didatico
+Todo o tema visual é fictício. O projeto não usa marcas oficiais, escudos reais, jogadores reais, logotipos protegidos ou imagens externas.
 
-O projeto foi criado para uma aula pratica de exploracao, teste e registro de defeitos. Os alunos devem navegar pelo sistema como colecionadores, validar regras de negocio, usabilidade, PWA, controle de acesso e fluxos de troca.
+## Objetivo da atividade
 
-O sistema contem bugs intencionais. O arquivo `BUG_MAP_PROFESSOR.md` e exclusivo do professor e nao deve ser entregue aos alunos.
+Os alunos devem explorar o sistema como uma equipe de QA em ambiente de homologação, investigando funcionalidades, usabilidade, responsividade, PWA, controle de acesso, validações e consistência de dados.
 
-## Stack
+O foco da atividade é praticar:
+
+- testes exploratórios;
+- testes funcionais;
+- análise de usabilidade;
+- testes em experiência mobile/PWA;
+- classificação de severidade e prioridade;
+- registro de evidências;
+- criação de casos de teste de regressão.
+
+## Tecnologias utilizadas
 
 - Java 21
 - Spring Boot 3
@@ -20,120 +30,183 @@ O sistema contem bugs intencionais. O arquivo `BUG_MAP_PROFESSOR.md` e exclusivo
 - Spring Data JPA
 - PostgreSQL
 - Flyway
-- HTML, CSS e JavaScript simples
+- HTML, CSS e JavaScript
 - PWA
-- Docker e Docker Compose
+- Docker
+- Docker Compose
 
-## Identidade visual
+## Pré-requisitos
 
-A interface mistura album de figurinhas, futebol ficticio, tecnologia e qualidade de software. A marca usa:
-
-- escudo estilizado;
-- figurinha brilhante;
-- check de qualidade;
-- referencia discreta a investigacao de bugs;
-- paleta em azul escuro, ciano, roxo e dourado.
-
-Os assets ficam em `src/main/resources/static/img/`.
-
-## Pre-requisitos
+Para o caminho principal da atividade, instale:
 
 - Docker
 - Docker Compose
 
-Nao e necessario instalar Java, Maven ou PostgreSQL localmente para executar a aplicacao via Docker.
+Para abrir e analisar o código no NetBeans, instale também:
 
-## Como executar com Docker
+- NetBeans com suporte a Maven
 
-Na raiz do projeto, execute:
+Java 21 e Maven locais são opcionais se você for executar somente via Docker.
+
+## Como abrir o projeto no NetBeans
+
+1. Abra o NetBeans.
+2. Clique em **File > Open Project**.
+3. Selecione a pasta do projeto `figuriqa-2026-alunos`.
+4. Aguarde o NetBeans reconhecer o projeto Maven.
+5. Confirme se o arquivo `pom.xml` aparece na raiz.
+6. Para executar com Docker, abra o terminal na pasta do projeto e rode:
 
 ```bash
 docker compose up --build
 ```
 
-Acesse:
+7. Acesse no navegador:
 
 ```text
 http://localhost:8080
 ```
 
-A rota inicial exibe a landing page publica. Para entrar diretamente no sistema, use:
+O NetBeans será usado principalmente para:
+
+- visualizar o código-fonte;
+- navegar pelas classes Java;
+- analisar a estrutura do projeto;
+- consultar templates HTML;
+- observar configurações;
+- apoiar a investigação dos bugs.
+
+## Como executar com Docker
+
+Na pasta raiz do projeto, execute:
+
+```bash
+docker compose up --build
+```
+
+Esse comando sobe:
+
+- aplicação Spring Boot na porta `8080`;
+- banco PostgreSQL na porta `5432`;
+- migrations Flyway para criar schema e dados iniciais.
+
+## Como acessar o sistema
+
+Abra:
+
+```text
+http://localhost:8080
+```
+
+A página inicial exibe a landing page pública. Para acessar o login diretamente:
 
 ```text
 http://localhost:8080/login
 ```
 
-## Banco de dados
+## Usuários de teste
 
-O ambiente usa PostgreSQL, criado pelo Docker Compose.
-
-Dados de conexao local:
-
-| Campo | Valor |
-| --- | --- |
-| Host | `localhost` |
-| Porta | `5432` |
-| Banco | `figuriqa` |
-| Usuario | `figuriqa_user` |
-| Senha | `figuriqa_pass` |
-
-As tabelas e o seed inicial sao criados pelo Flyway em `src/main/resources/db/migration`.
-
-## Usuarios de teste
-
-| Usuario | Senha | Perfil |
+| Usuário | Senha | Perfil |
 | --- | --- | --- |
 | ana | 123456 | COLECIONADOR |
 | bruno | 123456 | COLECIONADOR |
 | carla | 123456 | COLECIONADOR |
 | admin | admin123 | ADMIN |
 
-## Como parar os containers
+O usuário `admin` existe apenas para fins de teste do ambiente.
+
+## Como parar o ambiente
 
 ```bash
 docker compose down
 ```
 
-## Como resetar o ambiente
+Esse comando para os containers, mantendo o volume do banco.
 
-Para parar a aplicacao mantendo os dados do PostgreSQL:
+## Como limpar volumes e reiniciar banco
 
-```bash
-docker compose down
-```
-
-Para limpar completamente os dados persistidos e recriar o banco pelo Flyway:
+Para apagar o banco local e recriar tudo do zero:
 
 ```bash
 docker compose down -v
 docker compose up --build
 ```
 
-Tambem existe uma opcao de reset na tela de Administracao para retornar a massa didatica inicial sem remover o volume.
+Use esse procedimento quando quiser voltar ao estado inicial da atividade.
 
-## Uso como PWA
+## Banco de dados local
 
-O projeto inclui `manifest.json`, `service-worker.js`, pagina offline e icones locais.
-
-Em Android/Chrome, ao acessar pelo celular, o sistema pode exibir o banner:
+O PostgreSQL fica disponível localmente em:
 
 ```text
-Instale o FiguriQA 2026 no seu celular
+localhost:5432
 ```
 
-Clique em **Instalar aplicativo** para adicionar o app a tela inicial. Em iPhone/Safari, quando o prompt automatico nao estiver disponivel, o sistema mostra a orientacao manual: tocar em Compartilhar e depois em Adicionar a Tela de Inicio.
+Configuração padrão:
 
-Caso esteja testando alteracoes no PWA, limpe os dados do site `localhost:8080` no navegador ou use uma aba anonima para evitar cache antigo.
+| Campo | Valor |
+| --- | --- |
+| Banco | figuriqa |
+| Usuário | figuriqa_user |
+| Senha | figuriqa_pass |
 
-## Orientacoes para registro de bugs
+As migrations ficam em:
 
-Ao encontrar um problema, registre:
+```text
+src/main/resources/db/migration
+```
 
-- contexto e usuario utilizado;
-- passos claros para reproduzir;
+## Como testar como PWA no celular
+
+1. Suba a aplicação com Docker.
+2. Acesse o sistema pelo navegador do celular usando o endereço da máquina na rede local.
+3. Em navegadores compatíveis, observe a sugestão de instalação do app.
+4. No Android/Chrome, use a opção de instalar aplicativo quando disponível.
+5. No iPhone/Safari, use **Compartilhar > Adicionar à Tela de Início**.
+6. Teste navegação, login, layout mobile e comportamento offline.
+
+Se estiver testando cache ou service worker, limpe os dados do site no navegador antes de repetir os testes.
+
+## Como registrar bugs
+
+Cada bug deve ser registrado com:
+
+- título claro;
+- área afetada;
+- tipo do defeito;
+- severidade;
+- prioridade;
+- ambiente;
+- usuário utilizado;
+- passos para reproduzir;
 - resultado esperado;
 - resultado obtido;
-- evidencia, como print, video curto, log ou URL;
-- severidade e prioridade justificadas.
+- evidência;
+- sugestão de correção;
+- caso de teste de regressão.
 
-Use o modelo do arquivo `README_ALUNO.md`.
+Use o modelo completo em `README_ALUNO.md`.
+
+## Regras da atividade
+
+- Teste o sistema como se ele estivesse em homologação.
+- Não altere o código antes de registrar os bugs.
+- Registre evidências sempre que possível.
+- Classifique severidade e prioridade com justificativa.
+- Teste mais de um usuário.
+- Teste desktop e mobile.
+- Teste experiência PWA e comportamento offline.
+- Teste controle de acesso e validações de campos.
+- Não use ferramentas destrutivas contra o ambiente de colegas.
+
+## Critérios de entrega
+
+Cada equipe deve entregar:
+
+- relatório de bugs;
+- evidências em imagem ou vídeo curto;
+- lista dos principais riscos encontrados;
+- sugestões de melhoria;
+- pelo menos um caso de teste de regressão para cada bug crítico ou de alta severidade.
+
+O professor poderá solicitar uma breve apresentação dos principais achados.
